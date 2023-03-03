@@ -32,7 +32,7 @@ public class MovimientoController {
         return ResponseEntity.status(HttpStatus.OK).body(this.movimientoService.getMovimientoId(id));
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<Movimiento> saveMovimiento(@Valid @RequestBody Movimiento movimiento) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.movimientoService.crearMovimiento(movimiento));
     }

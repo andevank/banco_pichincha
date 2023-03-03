@@ -32,7 +32,7 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.OK).body(this.clienteService.getClienteId(id));
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<Cliente> saveCliente(@Valid @RequestBody Cliente cliente) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.clienteService.crearCliente(cliente));
     }

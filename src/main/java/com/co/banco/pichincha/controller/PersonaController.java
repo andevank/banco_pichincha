@@ -32,7 +32,7 @@ public class PersonaController {
         return ResponseEntity.status(HttpStatus.OK).body(this.personaService.getPersonaId(id));
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<Persona> savePersona(@Valid @RequestBody final Persona persona) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.personaService.crearPersona(persona));
     }

@@ -32,7 +32,7 @@ public class CuentaController {
         return ResponseEntity.status(HttpStatus.OK).body(this.cuentaService.getCuentaId(id));
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<Cuenta> saveCuenta(@Valid @RequestBody Cuenta cuenta) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.cuentaService.crearCuenta(cuenta));
     }
