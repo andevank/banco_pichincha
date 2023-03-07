@@ -1,20 +1,20 @@
 package com.co.banco.pichincha.service;
 
-import com.co.banco.pichincha.model.Cliente;
-import org.springframework.data.domain.Page;
+import com.co.banco.pichincha.dto.ClienteDTO;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface ClienteService {
-    Cliente crearCliente(Cliente cliente);
 
-    Cliente actualizarCliente(Cliente cliente);
+    List<ClienteDTO> getAllClientes();
 
-    void eliminarCliente(Long id);
+    ClienteDTO getClienteById(Long id);
 
-    Page<Cliente> getClientes(Integer page, Integer size, Boolean enablePagination);
+    ClienteDTO crearCliente(ClienteDTO entity);
 
-    Optional<Cliente> getClienteId(Long id);
+    ClienteDTO actualizarCliente(ClienteDTO entity) throws Exception;
 
-    boolean exitsById(Long id);
+    void deleteById(Long id) throws Exception;
+
+    Long count();
 }

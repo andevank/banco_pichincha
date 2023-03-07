@@ -1,20 +1,20 @@
 package com.co.banco.pichincha.service;
 
-import com.co.banco.pichincha.model.Cuenta;
-import org.springframework.data.domain.Page;
+import com.co.banco.pichincha.dto.CuentaDTO;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface CuentaService {
-    Cuenta crearCuenta(Cuenta cuenta);
 
-    Cuenta actualizarCuenta(Cuenta cuenta);
+    List<CuentaDTO> getAllCuentas();
 
-    void eliminarCuenta(Long id);
+    CuentaDTO getCuentaById(Long id);
 
-    Page<Cuenta> getCuentas(Integer page, Integer size, Boolean enablePagination);
+    CuentaDTO crearCuenta(CuentaDTO entity);
 
-    Optional<Cuenta> getCuentaId(Long id);
+    CuentaDTO actualizarCuenta(CuentaDTO entity) throws Exception;
 
-    boolean exitsById(Long id);
+    void deleteById(Long id) throws Exception;
+
+    Long count();
 }

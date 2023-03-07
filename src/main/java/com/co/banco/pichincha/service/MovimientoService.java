@@ -1,20 +1,22 @@
 package com.co.banco.pichincha.service;
 
-import com.co.banco.pichincha.model.Movimiento;
-import org.springframework.data.domain.Page;
+import com.co.banco.pichincha.dto.MovimientoDTO;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface MovimientoService {
-    Movimiento crearMovimiento(Movimiento movimiento);
 
-    Movimiento actualizarMovimiento(Movimiento movimiento);
+    List<MovimientoDTO> getAllMovimientos();
 
-    void eliminarMovimiento(Long id);
+    MovimientoDTO getMovimientoById(Long id);
 
-    Page<Movimiento> getMovimientos(Integer page, Integer size, Boolean enablePagination);
+    MovimientoDTO crearMovimiento(MovimientoDTO entity);
 
-    Optional<Movimiento> getMovimientoId(Long id);
+    MovimientoDTO actualizarMovimiento(MovimientoDTO entity) throws Exception;
 
-    boolean exitsById(Long id);
+    MovimientoDTO getReporteFechaUsuario(Long id);
+
+    void deleteById(Long id) throws Exception;
+
+    Long count();
 }
