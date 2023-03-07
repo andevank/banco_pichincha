@@ -12,13 +12,17 @@ public class Cuenta {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(name = "numerocuenta", nullable = false)
     private Long numerocuenta;
 
-    private Boolean estado;
+    @Column(name = "tipocuenta", nullable = false)
+    private String tipocuenta;
 
+    @Column(name = "saldoinicial", nullable = false)
     private BigDecimal saldoinicial;
 
-    private String tipocuenta;
+    @Column(name = "estado", nullable = false)
+    private Boolean estado;
 
     //bi-directional many-to-one association to Cliente
     @ManyToOne
@@ -29,6 +33,17 @@ public class Cuenta {
     @OneToMany(mappedBy="cuenta")
     private List<Movimiento> movimientos;
 
+    public Cuenta(){
+
+    }
+    public Cuenta(final Long id, final Long numerocuenta, final String tipocuenta, final BigDecimal saldoinicial, final Boolean estado, final Cliente cliente) {
+        this.id = id;
+        this.numerocuenta = numerocuenta;
+        this.tipocuenta = tipocuenta;
+        this.saldoinicial = saldoinicial;
+        this.estado = estado;
+        this.cliente = cliente;
+    }
 
     public Long getId() {
         return this.id;

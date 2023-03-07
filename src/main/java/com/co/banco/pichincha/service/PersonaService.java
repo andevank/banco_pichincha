@@ -1,21 +1,21 @@
 package com.co.banco.pichincha.service;
 
+import com.co.banco.pichincha.dto.PersonaDTO;
 import com.co.banco.pichincha.model.Persona;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PersonaService {
-    Persona crearPersona(Persona persona);
 
-    Persona actualizarPersona(Persona persona);
+    List<PersonaDTO> getAllPersonas();
 
-    void eliminarPersona(Long id);
+    PersonaDTO getPersonaById(Long id);
 
-    Page<Persona> getPersonas(Integer page, Integer size, Boolean enablePagination);
+    PersonaDTO crearPersona(PersonaDTO entity);
 
-    Optional<Persona> getPersonaId(Long id);
+    PersonaDTO actualizarPersona(PersonaDTO entity) throws Exception;
 
-    boolean exitsById(Long id);
+    void deleteById(Long id) throws Exception;
+
+    Long count();
 }

@@ -1,48 +1,106 @@
 package com.co.banco.pichincha.service;
 
+import com.co.banco.pichincha.dto.MovimientoDTO;
+import com.co.banco.pichincha.exception.ResourceNotFoundException;
+import com.co.banco.pichincha.mapper.MovimientoMapper;
 import com.co.banco.pichincha.model.Movimiento;
 import com.co.banco.pichincha.repository.MovimientoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-public class MovimientoServiceImpl implements MovimientoService{
+public class MovimientoServiceImpl implements MovimientoService {
 
     @Autowired
     private MovimientoRepository movimientoRepository;
 
     @Override
-    public Movimiento crearMovimiento(final Movimiento movimiento) {
-        return this.movimientoRepository.save(movimiento);
+    @Transactional(readOnly = true)
+    public List<MovimientoDTO> getAllMovimientos() {
+        List<Movimiento> movimientos = movimientoRepository.findAll();
+        return movimientos.stream().map(MovimientoMapper::maptoMovimientoDTO).collect(Collectors.toList());
     }
 
     @Override
-    public Movimiento actualizarMovimiento(final Movimiento movimiento) {
-        return this.movimientoRepository.saveAndFlush(movimiento);
+    @Transactional(readOnly = true)
+    public MovimientoDTO getMovimientoById(Long id) {
+        Optional<Movimiento> result = movimientoRepository.findById(id);
+
+        if (result.isEmpty()) {
+            throw new ResourceNotFoundException("Movimiento no encontrado con el id = " + id);
+        }
+        Movimiento movimiento = result.get();
+        return MovimientoMapper.maptoMovimientoDTO(movimiento);
     }
 
     @Override
-    public void eliminarMovimiento(final Long id) {
-        this.movimientoRepository.deleteById(id);
+    @Transactional(readOnly = true)
+    public MovimientoDTO getReporteFechaUsuario(Long id) {
+        Optional<Movimiento> result = movimientoRepository.getReporteFechaUsuario(id);
+
+        if (result.isEmpty()) {
+            throw new ResourceNotFoundException("Movimiento no encontrado con el id = " + id);
+        }
+        Movimiento movimiento = result.get();
+        return MovimientoMapper.maptoMovimientoDTO(movimiento);
     }
 
     @Override
-    public Page<Movimiento> getMovimientos(final Integer page, final Integer size, final Boolean enablePagination) {
-        return this.movimientoRepository.findAll(enablePagination? PageRequest.of(page,size): Pageable.unpaged());
+    @Transactional(readOnly = true)
+    public Long count() {
+        return movimientoRepository.count();
     }
 
     @Override
-    public Optional<Movimiento> getMovimientoId(final Long id) {
-        return Optional.of(this.movimientoRepository.findById(id).get());
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public MovimientoDTO crearMovimiento(MovimientoDTO movimientoDTO) {
+
+        if (movimientoDTO == null) {
+            throw new ResourceNotFoundException("El Movimiento es nulo");
+        }
+        Movimiento movimiento = MovimientoMapper.maptoMovimiento(movimientoDTO);
+        Movimiento saveMovimiento = movimientoRepository.save(movimiento);
+
+        MovimientoDTO saveMovimientoDTO = MovimientoMapper.maptoMovimientoDTO(saveMovimiento);
+
+        return saveMovimientoDTO;
     }
 
     @Override
-    public boolean exitsById(final Long id){
-        return this.movimientoRepository.existsById(id);
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public MovimientoDTO actualizarMovimiento(MovimientoDTO movimientoDTO) {
+
+        Movimiento currentMovimiento = movimientoRepository.findById(movimientoDTO.getId()).get();
+
+        if (currentMovimiento == null) {
+            throw new ResourceNotFoundException("La Movimiento es nula");
+        }
+        if (currentMovimiento.getId() == null) {
+            throw new ResourceNotFoundException("La Movimiento no esta registrada");
+        }
+
+        currentMovimiento.setId(movimientoDTO.getId());
+        currentMovimiento.setFecha(movimientoDTO.getFecha());
+        currentMovimiento.setTipoMovimiento(movimientoDTO.getTipoMovimiento());
+        currentMovimiento.setValor(movimientoDTO.getValor());
+        currentMovimiento.setSaldo(movimientoDTO.getSaldo());
+        currentMovimiento.setCuenta(movimientoDTO.getCuenta());
+
+
+        Movimiento updateMovimiento = movimientoRepository.save(currentMovimiento);
+
+        return MovimientoMapper.maptoMovimientoDTO(updateMovimiento);
+    }
+
+    @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void deleteById(Long id) throws Exception {
+        movimientoRepository.deleteById(id);
     }
 }

@@ -11,8 +11,10 @@ public class Cliente {
     @Column(name = "clienteid", nullable = false)
     private Long clienteid;
 
+    @Column(name = "contrasena", nullable = false)
     private Integer contrasena;
 
+    @Column(name = "estado", nullable = false)
     private Boolean estado;
 
     //bi-directional many-to-one association to Persona
@@ -25,6 +27,13 @@ public class Cliente {
     private List<Cuenta> cuentas;
 
     public Cliente() {
+    }
+
+    public Cliente(final Long clienteid, final Integer contrasena, final Boolean estado, final Persona persona) {
+        this.clienteid = clienteid;
+        this.contrasena = contrasena;
+        this.estado = estado;
+        this.persona = persona;
     }
 
     public Long getClienteId() {
