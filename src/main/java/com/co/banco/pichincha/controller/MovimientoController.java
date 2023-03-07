@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -42,8 +43,8 @@ public class MovimientoController {
         return new ResponseEntity<>(movimientoDTO, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/reporte/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<MovimientoDTO> getReporteFechaUsuario(@PathVariable("clienteid") Long clienteid) {
+    @GetMapping(value = "/reporte/{clienteid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<MovimientoDTO> getReporteFechaUsuario(@PathVariable(name="clienteid") @NotNull final Long clienteid) {
         LOGGER.info("Getting Movimiento by id...");
         MovimientoDTO movimientoDTO = movimientoService.getReporteFechaUsuario(clienteid);
         LOGGER.info("Getting Movimiento by id finished");

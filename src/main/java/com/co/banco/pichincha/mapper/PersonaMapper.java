@@ -8,7 +8,6 @@ public class PersonaMapper {
     public static PersonaDTO maptoPersonaDTO(final Persona persona) {
         final PersonaDTO personaDTO = new PersonaDTO(
                 persona.getId(),
-                persona.getPersonaid(),
                 persona.getNombres(),
                 persona.getGenero(),
                 persona.getEdad(),
@@ -21,7 +20,6 @@ public class PersonaMapper {
     public static Persona maptoPersona(PersonaDTO personaDTO) {
         Persona persona = new Persona(
                 personaDTO.getId(),
-                personaDTO.getPersonaid(),
                 personaDTO.getNombres(),
                 personaDTO.getGenero(),
                 personaDTO.getEdad(),

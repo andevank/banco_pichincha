@@ -10,7 +10,7 @@ public class ClienteMapper {
                 cliente.getClienteid(),
                 cliente.getContrasena(),
                 cliente.getEstado(),
-                cliente.getPersona());
+                cliente.getIdpersona());
         return clienteDTO;
     }
 
@@ -19,7 +19,7 @@ public class ClienteMapper {
                 clienteDTO.getClienteid(),
                 clienteDTO.getContrasena(),
                 clienteDTO.getEstado(),
-                clienteDTO.getPersona());
+                clienteDTO.getIdpersona());
         return cliente;
     }
 }

@@ -74,8 +74,6 @@ public class PersonaServiceImpl implements PersonaService {
         if(currentPersona.getId()==null){
             throw new ResourceNotFoundException("La Persona no esta registrada");
         }
-
-        currentPersona.setPersonaid(personaDTO.getPersonaid());
         currentPersona.setNombres(personaDTO.getNombres());
         currentPersona.setGenero(personaDTO.getGenero());
         currentPersona.setEdad(personaDTO.getEdad());

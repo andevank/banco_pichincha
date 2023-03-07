@@ -23,7 +23,6 @@ public class PersonaServiceTest {
     void crearPersona(){
 
         PersonaDTO persona = new PersonaDTO();
-        persona.setPersonaid("41485232");
         persona.setNombres("Margaret Tacher");
         persona.setGenero("Femenino");
         persona.setEdad(41L);

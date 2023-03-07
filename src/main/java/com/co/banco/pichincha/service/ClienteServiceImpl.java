@@ -70,14 +70,14 @@ public class ClienteServiceImpl implements ClienteService {
         if(currentCliente==null){
             throw new ResourceNotFoundException("La Cliente es nula");
         }
-        if(currentCliente.getClienteId()==null){
+        if(currentCliente.getClienteid()==null){
             throw new ResourceNotFoundException("La Cliente no esta registrada");
         }
 
         currentCliente.setClienteid(clienteDTO.getClienteid());
         currentCliente.setContrasena(clienteDTO.getContrasena());
         currentCliente.setEstado(clienteDTO.getEstado());
-        currentCliente.setPersona(clienteDTO.getPersona());
+        currentCliente.setIdpersona(clienteDTO.getIdpersona());
 
         Cliente updateCliente=clienteRepository.save(currentCliente);
 

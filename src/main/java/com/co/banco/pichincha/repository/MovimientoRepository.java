@@ -10,19 +10,6 @@ import java.util.Optional;
 
 public interface MovimientoRepository extends JpaRepository<Movimiento, Long> {
 
-    @Query(value = "SELECT" +
-            " M.FECHA as FECHA,\n" +
-            " P.NOMBRES as NOMBRE_CLIENTE," +
-            " CT.NUMEROCUENTA as NUMERO_DE_CUENTA," +
-            " CT.TIPOCUENTA as TIPO_CUENTA," +
-            " CT.SALDOINICIAL as SALDO_INICIAL," +
-            " CT.ESTADO as ESTADO," +
-            " M.VALOR as MOVIMIENTO," +
-            " M.SALDO as SALDO" +
-            " FROM CLIENTE C" +
-            " INNER JOIN PERSONA P ON C.PERSONAID  = P.PERSONAID  \n" +
-            " INNER JOIN CUENTA  CT ON C.CLIENTEID = CT.CLIENTEID \n" +
-            " INNER JOIN MOVIMIENTO M ON M.NUMERO_CUENTA = CT.NUMEROCUENTA" +
-            " WHERE C.CLIENTEID=: clienteid ", nativeQuery = true)
+    @Query(value = "SELECT M.FECHA,P.NOMBRES,CT.NUMERO_CUENTA, CT.TIPOCUENTA,CT.SALDOINICIAL,CT.ESTADO,M.VALOR,M.SALDO FROM CLIENTE C INNER JOIN PERSONA P ON C.PERSONAID = P.PERSONAID INNER JOIN CUENTA CT ON C.CLIENTEID = CT.CLIENTEID INNER JOIN MOVIMIENTO M ON M.NUMERO_CUENTA = CT.NUMERO_CUENTA", nativeQuery = true)
     Optional<Movimiento> getReporteFechaUsuario(@Param("clienteid") Long clienteid);
 }

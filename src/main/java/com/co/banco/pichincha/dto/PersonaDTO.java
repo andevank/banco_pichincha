@@ -8,10 +8,9 @@ import lombok.*;
 @Getter
 @Setter
 public class PersonaDTO {
-    private Long id;
     @Id
-    private String personaid;
-    @NotNull
+    private Long id;
+     @NotNull
     private String nombres;
 
     @NotNull
@@ -27,9 +26,8 @@ public class PersonaDTO {
     @NotNull
     private boolean estado;
 
-    public PersonaDTO(final Long id, final String personaid, final String nombres, final String genero, final Long edad, final String direccion, final String telefono, final boolean estado) {
+    public PersonaDTO(final Long id, final String nombres, final String genero, final Long edad, final String direccion, final String telefono, final boolean estado) {
         this.id = id;
-        this.personaid = personaid;
         this.nombres = nombres;
         this.genero = genero;
         this.edad = edad;

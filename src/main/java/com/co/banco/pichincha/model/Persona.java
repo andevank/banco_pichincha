@@ -19,11 +19,6 @@ public class Persona implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
-    @Column(name = "personaid", nullable = false)
-    @NotNull
-    private String personaid;
-
     @Column(name = "nombres", nullable = false)
     private String nombres;
 
@@ -43,9 +38,9 @@ public class Persona implements Serializable {
 
     public Persona() { }
 
-    public Persona(final Long id, final String personaid, final String nombres, final String genero, final Long edad, final String direccion, final String telefono,final boolean estado) {
+    public Persona(final Long id, final String nombres, final String genero, final Long edad, final String direccion, final String telefono,final boolean estado) {
         this.id = id;
-        this.personaid = personaid;
+
         this.nombres = nombres;
         this.genero = genero;
         this.edad = edad;
@@ -60,14 +55,6 @@ public class Persona implements Serializable {
 
     public void setId(final Long id) {
         this.id = id;
-    }
-
-    public String getPersonaid() {
-        return this.personaid;
-    }
-
-    public void setPersonaid(final String personaid) {
-        this.personaid = personaid;
     }
 
     public String getNombres() {

@@ -1,5 +1,7 @@
 package com.co.banco.pichincha.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,11 +20,13 @@ public class Cliente {
     private Boolean estado;
 
     //bi-directional many-to-one association to Persona
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name="personaid")
-    private Persona persona;
+    @JoinColumn(name="idpersona")
+    private Persona idpersona;
 
     //bi-directional many-to-one association to Cuenta
+    @JsonIgnore
     @OneToMany(mappedBy="cliente")
     private List<Cuenta> cuentas;
 
@@ -33,15 +37,7 @@ public class Cliente {
         this.clienteid = clienteid;
         this.contrasena = contrasena;
         this.estado = estado;
-        this.persona = persona;
-    }
-
-    public Long getClienteId() {
-        return this.clienteid;
-    }
-
-    public void setClienteId(final Long id) {
-        clienteid = id;
+        this.idpersona = persona;
     }
 
     public Long getClienteid() {
@@ -68,12 +64,12 @@ public class Cliente {
         this.estado = estado;
     }
 
-    public Persona getPersona() {
-        return this.persona;
+    public Persona getIdpersona() {
+        return this.idpersona;
     }
 
-    public void setPersona(final Persona persona) {
-        this.persona = persona;
+    public void setIdpersona(final Persona idpersona) {
+        this.idpersona = idpersona;
     }
 
     public List<Cuenta> getCuentas() {
