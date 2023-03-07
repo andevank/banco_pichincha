@@ -41,11 +41,11 @@ public class MovimientoServiceImpl implements MovimientoService {
 
     @Override
     @Transactional(readOnly = true)
-    public MovimientoDTO getReporteFechaUsuario(Long id) {
-        Optional<Movimiento> result = movimientoRepository.getReporteFechaUsuario(id);
+    public MovimientoDTO getReporteFechaUsuario(Long clienteid) {
+        Optional<Movimiento> result = movimientoRepository.getReporteFechaUsuario(clienteid);
 
         if (result.isEmpty()) {
-            throw new ResourceNotFoundException("Movimiento no encontrado con el id = " + id);
+            throw new ResourceNotFoundException("Movimiento no encontrado con el id = " + clienteid);
         }
         Movimiento movimiento = result.get();
         return MovimientoMapper.maptoMovimientoDTO(movimiento);

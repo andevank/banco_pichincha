@@ -1,5 +1,7 @@
 package com.co.banco.pichincha.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,7 +14,7 @@ public class Cuenta {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "numerocuenta", nullable = false)
+    @Column(name = "numero_cuenta", nullable = false)
     private Long numerocuenta;
 
     @Column(name = "tipocuenta", nullable = false)
@@ -25,11 +27,13 @@ public class Cuenta {
     private Boolean estado;
 
     //bi-directional many-to-one association to Cliente
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="clienteid")
     private Cliente cliente;
 
     //bi-directional many-to-one association to Movimiento
+    @JsonIgnore
     @OneToMany(mappedBy="cuenta")
     private List<Movimiento> movimientos;
 
