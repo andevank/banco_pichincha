@@ -8,10 +8,9 @@ public class MovimientoMapper {
     public static MovimientoDTO maptoMovimientoDTO(final Movimiento movimiento) {
         final MovimientoDTO movimientoDTO = new MovimientoDTO(
                 movimiento.getId(),
+                movimiento.getMovimiento(),
+                movimiento.getEstado(),
                 movimiento.getFecha(),
-                movimiento.getTipoMovimiento(),
-                movimiento.getValor(),
-                movimiento.getSaldo(),
                 movimiento.getCuenta());
         return movimientoDTO;
     }
@@ -19,10 +18,9 @@ public class MovimientoMapper {
     public static Movimiento maptoMovimiento(MovimientoDTO movimientoDTO) {
         Movimiento movimiento = new Movimiento(
                 movimientoDTO.getId(),
+                movimientoDTO.getMovimiento(),
+                movimientoDTO.getEstado(),
                 movimientoDTO.getFecha(),
-                movimientoDTO.getTipoMovimiento(),
-                movimientoDTO.getValor(),
-                movimientoDTO.getSaldo(),
                 movimientoDTO.getCuenta());
         return movimiento;
     }

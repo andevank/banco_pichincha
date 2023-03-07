@@ -86,10 +86,9 @@ public class MovimientoServiceImpl implements MovimientoService {
         }
 
         currentMovimiento.setId(movimientoDTO.getId());
+        currentMovimiento.setMovimiento(movimientoDTO.getMovimiento());
         currentMovimiento.setFecha(movimientoDTO.getFecha());
-        currentMovimiento.setTipoMovimiento(movimientoDTO.getTipoMovimiento());
-        currentMovimiento.setValor(movimientoDTO.getValor());
-        currentMovimiento.setSaldo(movimientoDTO.getSaldo());
+        currentMovimiento.setEstado(movimientoDTO.getEstado());
         currentMovimiento.setCuenta(movimientoDTO.getCuenta());
 
 

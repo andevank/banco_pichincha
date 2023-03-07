@@ -20,26 +20,22 @@ public class MovimientoDTO {
     private Long id;
 
     @NotNull
+    private String movimiento;
+
+    @NotNull
+    private Boolean estado;
+
+    @NotNull
     private Date fecha;
-
-    @NotNull
-    private String tipoMovimiento;
-
-    @NotNull
-    private BigDecimal saldo;
-
-    @NotNull
-    private BigDecimal valor;
 
     @NotNull
     private Cuenta cuenta;
 
-    public MovimientoDTO(final Long id, final Date fecha, final String tipoMovimiento, final BigDecimal saldo, final BigDecimal valor, final Cuenta cuenta) {
+    public MovimientoDTO(final Long id, final String movimiento, final Boolean estado, final Date fecha, final Cuenta cuenta) {
         this.id = id;
+        this.movimiento = movimiento;
+        this.estado = estado;
         this.fecha = fecha;
-        this.tipoMovimiento = tipoMovimiento;
-        this.saldo = saldo;
-        this.valor = valor;
         this.cuenta = cuenta;
     }
 }
